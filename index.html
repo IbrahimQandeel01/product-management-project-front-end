@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUDS PROJECT</title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,100..900&display=swap" rel="stylesheet">
+
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <div class="container"></div>
+        <div class="head text-center text-uppercase my-4 ">
+            <h1>CRUD</h1>
+            <p>Product Management System</p>
+        </div>
+
+    <div class="input">
+        <div class="container">
+
+            <div class="row title">
+                <input type="text" placeholder="title" id="title">
+            </div>
+            <div class="price row ">
+                <input onkeyup="getTotal()" class="col-3" type="number" id="price" placeholder="price">     
+                <input onkeyup="getTotal()" class="col-3" type="number" id="taxes" placeholder="taxes">            
+                <input onkeyup="getTotal()" class="col-3" type="number" id="ads" placeholder="ads">            
+                <input onkeyup="getTotal()" class="col-2 ms-3" type="discount" id="discount" placeholder="discount">         
+            </div>
+            <div class=" total row text-center text-uppercase">
+                <div class="total my-2"><small class="total-color" id="total-color">total:</small>
+                    <span class="total-ammount" id="total-ammount"> 2332 </span></div> 
+            </div>
+
+            <div class="count row">
+                <input class="" type="number" id="count" placeholder="count">                 
+            </div>
+
+            <div class="category row">
+                <input class="" type="text" id="category" placeholder="category">                 
+            </div>
+
+            <div class="create row">
+                <button type="button" class=" rounded-pill" id="create">create</button>            
+            </div>
+
+            <div class="search">
+                <div class="search row">
+                    <input onkeyup="searchData(this.value)" class="" type="text" id="search" placeholder="search">                 
+                </div>
+
+                <div class="create row d-flex justify-content-center">
+                    <button type="button" class=" rounded-pill col-5" id="title" onclick="getSearchMode(this.id)">search by title</button>            
+                    <button type="button" class=" rounded-pill col-5" id="category" onclick="getSearchMode(this.id)">search by category</button>            
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="deleteAll-none container text-center" id="deleteAll">
+        <button onclick="deleteAll()" type="button" class=" rounded-pill col-8" >delete all ( <span id="arr-len"></span> )</button>            
+    </div>
+
+    <div class="container">
+        <table class="my-5 ">
+            <thead class="text-uppercase">
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>price</th>
+                    <th>taxis</th>
+                    <th>ads</th>
+                    <th>discount</th>
+                    <th>total</th>
+                    <th>category</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
