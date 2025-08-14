@@ -1,5 +1,16 @@
+// Initialize tooltips when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl, {
+            customClass: 'custom-tooltip'
+        });
+    });
+});
+
 // API Configuration
-const API_BASE_URL = 'http://product-management-back-end-b9cphccqfyehh7aj.uaenorth-01.azurewebsites.net/api/products';
+const API_BASE_URL = 'https://product-management-back-end-b9cphccqfyehh7aj.uaenorth-01.azurewebsites.net/api/products';
+// const API_BASE_URL = 'http://localhost:9090/api/products';
 
 // DOM Elements
 let title = document.getElementById("title");
@@ -258,4 +269,72 @@ async function searchData() {
         console.error('Error searching products:', error);
         window.alert("Error searching products. Please try again.");
     }
+}
+
+async function autoGenerate() {
+    const autoGenerateButton = document.getElementById('auto-generate-button');
+    const originalContent = autoGenerateButton.innerHTML;
+    
+    // Get tooltip instance and hide it during loading
+    const tooltipInstance = bootstrap.Tooltip.getInstance(autoGenerateButton);
+    if (tooltipInstance) {
+        tooltipInstance.hide();
+    }
+    
+    // Show loading state
+    autoGenerateButton.disabled = true;
+    autoGenerateButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+    autoGenerateButton.classList.add('loading');
+    autoGenerateButton.setAttribute('title', 'Generating product...');
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/autoGenerate`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to generate product');
+        }
+        
+        const product = await response.json();
+        title.value = product.title;
+        price.value = product.price;
+        taxes.value = product.taxes;
+        ads.value = product.ads;
+        discount.value = product.discount;
+        // totalAmmount.innerHTML = product.total;
+        category.value = product.category;
+        mode = "create";
+        getTotal();
+        
+        // Show success message briefly
+        autoGenerateButton.innerHTML = '<i class="fa-solid fa-check"></i> Generated!';
+        autoGenerateButton.classList.add('success');
+        autoGenerateButton.setAttribute('title', 'Product generated successfully!');
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+            autoGenerateButton.innerHTML = originalContent;
+            autoGenerateButton.classList.remove('loading', 'success');
+            autoGenerateButton.disabled = false;
+            autoGenerateButton.setAttribute('title', 'Generate with AI');
+        }, 2000);
+        
+    } catch (error) {
+        console.error('Error generating product:', error);
+        
+        // Show error state
+        autoGenerateButton.innerHTML = '<i class="fa-solid fa-exclamation-triangle"></i> Error';
+        autoGenerateButton.classList.add('error');
+        autoGenerateButton.setAttribute('title', 'Failed to generate product');
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            autoGenerateButton.innerHTML = originalContent;
+            autoGenerateButton.classList.remove('loading', 'error');
+            autoGenerateButton.disabled = false;
+            autoGenerateButton.setAttribute('title', 'Generate with AI');
+        }, 3000);
+        
+        window.alert("Error generating product. Please try again.");
+    }
+
 }

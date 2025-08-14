@@ -1,4 +1,5 @@
 
+
 :root{
     --background-color: #222; 
     --white-color: white; 
@@ -55,4 +56,75 @@ th,td {
 
 button:focus{
     box-shadow: none;
+}
+
+#auto-generate-button{
+    position: fixed;
+    padding: 8.5px 13px !important;
+    top: 60px;
+    right: 25px;
+    z-index: 1000;
+    background-color: #42007D !important ;
+    color: var(--white-color) !important;
+    border-radius: 100px;
+}
+
+#auto-generate-button:hover{
+    background-color: #530d90 !important;    
+    
+}
+#auto-generate-button {
+    box-shadow: none !important;
+}
+
+.custom-tooltip .tooltip-inner {
+    background-color: white !important;
+    color: #42007D !important;
+    font-weight: 700;
+    font-size: larger;
+    border: 1px solid #dee2e6;
+}
+
+.custom-tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: white !important;
+}
+
+/* Loading states for auto-generate button */
+#auto-generate-button.loading {
+    background-color: #ffc107 !important;
+    cursor: not-allowed;
+}
+
+#auto-generate-button.loading:hover {
+    background-color: #ffc107 !important;
+}
+
+#auto-generate-button.success {
+    background-color: #28a745 !important;
+}
+
+#auto-generate-button.success:hover {
+    background-color: #28a745 !important;
+}
+
+#auto-generate-button.error {
+    background-color: #dc3545 !important;
+}
+
+#auto-generate-button.error:hover {
+    background-color: #dc3545 !important;
+}
+
+/* Spinning animation for loading spinner */
+.fa-spinner.fa-spin {
+    animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

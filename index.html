@@ -18,6 +18,8 @@
 
 </head>
 <body>
+
+    
     <div class="container"></div>
         <div class="head text-center text-uppercase my-4 ">
             <h1>CRUD</h1>
@@ -38,7 +40,7 @@
             </div>
             <div class=" total row text-center text-uppercase">
                 <div class="total my-2"><small class="total-color" id="total-color">total:</small>
-                    <span class="total-ammount" id="total-ammount"> 2332 </span></div> 
+                    <span class="total-ammount" id="total-ammount"> 0 </span></div> 
             </div>
 
             <div class="count row">
@@ -68,7 +70,7 @@
     </div>
 
     <div class="deleteAll-none container text-center" id="deleteAll">
-        <button onclick="deleteAll()" type="button" class=" rounded-pill col-8" >delete all ( <span id="arr-len"></span> )</button>            
+        <button onclick="deleteAll()" type="button" class="rounded-pill col-8" >delete all ( <span id="arr-len"></span> )</button>            
     </div>
 
     <div class="container">
@@ -87,12 +89,16 @@
                     <th>delete</th>
                 </tr>
             </thead>
-
             <tbody id="tbody">
-                
             </tbody>
         </table>
     </div>
+
+    <div>
+        <button id="auto-generate-button" onclick="autoGenerate()" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate with AI"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+    </div>
+    
+     
 
     <script src="main.js"></script>
 
